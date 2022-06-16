@@ -96,11 +96,26 @@ public class AccountDAO extends DBContext{
         }
     }
    
+   
+     public void updateAvatar(String id, String avatar) {
+        String query = " update [Account]\n"
+                + "  set img = ?\n"
+                + "  where ID =?;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, avatar);
+            ps.setString(2, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+     }
     public static void main(String[] args) {
 //        AccountDAO dao = new AccountDAO();
 //        dao.login("tramy", "123456");
 //           System.out.println(dao.login("tramy", "123456"));
 //dao.getAccountByID("1");
-        System.out.println(new AccountDAO().getAccountByID("1"));
+//        System.out.println(new AccountDAO().getAccountByID("1"));
     }
 }

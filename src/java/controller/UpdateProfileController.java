@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
-import dao.DAO;
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Subject;
-import model.Topic;
+import model.Account;
 
 /**
  *
- * @author nguye
+ * @author Tra My
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "UpdateProfileController", urlPatterns = {"/updateProfile"})
+public class UpdateProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +34,18 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DAO dao = new DAO();
-        List<Topic> listT = dao.getAllTopic();
-        List<Subject> listS = dao.getAllSubject();
-        
-        request.setAttribute("listTopic", listT);
-        request.setAttribute("listSubject", listS );
-        request.getRequestDispatcher("Homepage.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateProfileController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateProfileController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +60,11 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String id = request.getParameter("id");
+        AccountDAO dao = new AccountDAO();
+        Account account = dao.getAccountByID(id);
+        request.setAttribute("account", account);
+        request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
     }
 
     /**
@@ -71,7 +78,18 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String aboutme = request.getParameter("aboutMe");
+        AccountDAO dao = new AccountDAO();
+        
+        Account account = new Account();
+        account = dao.getAccountByID(id);
+        
+        dao.updateAccount(name, address, aboutme, id);
+        request.setAttribute("account", account);
+        response.sendRedirect("updateProfile?id=" + id);
     }
 
     /**

@@ -105,8 +105,8 @@
                                 </div>
                                 <!-- Form Group (about me)-->
                                 <div class="">
-                                    <label class="small mb-1" for="address">Address</label>
-                                    <input class="form-control" id="address" name="aboutMe" type="text" placeholder="Enter your address" value="${account.aboutMe}" >
+                                    <label class="small mb-1" for="address">About me</label>
+                                    <input class="form-control" id="address" name="aboutMe" type="text" placeholder="Enter about you" value="${account.aboutMe}" >
                                 </div>
                             </div>
                             <!-- Form Row        -->
