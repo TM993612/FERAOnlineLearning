@@ -17,8 +17,9 @@ import model.Category;
  *
  * @author Tra My
  */
-public class CategoryDAO extends DBContext{
-     public ArrayList<Category> getAllCategory() {
+public class CategoryDAO extends DBContext {
+
+    public ArrayList<Category> getAllCategory() {
         ArrayList<Category> list = new ArrayList<>();
         try {
             String sql = "select * from Category";
@@ -26,19 +27,20 @@ public class CategoryDAO extends DBContext{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Category category = new Category(rs.getInt("ID"),
-                                                 rs.getString("Name"));
+                        rs.getString("Name"));
 
                 list.add(category);
-                
+
             }
         } catch (Exception ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-     
-     public static void main(String[] args) {
-      ArrayList<Category> list = new CategoryDAO().getAllCategory();
-         System.out.println(list);
+
+    public static void main(String[] args) {
+        ArrayList<Category> list = new CategoryDAO().getAllCategory();
+        System.out.println(list);
     }
+
 }
