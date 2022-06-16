@@ -5,35 +5,33 @@
  */
 package model;
 
-/**
- *
- * @author Tra My
- */
 public class Lesson {
+    
     private int id;
     private String title;
-    private String type;
     private int topicID;
-    private int order;
+    private int subjectID;
+    private String type;
     private String status;
     private String videolink;
     private String conent;
-    private String subjectID;
-
+    private int order;
+    
     public Lesson() {
     }
 
-    public Lesson(int id, String title, String type, int topicID, int order, String status, String videolink, String conent, String subjectID) {
+    public Lesson(int id, String title, int topicID, int subjectID, String type, String status, String videolink, String conent, int order) {
         this.id = id;
         this.title = title;
-        this.type = type;
         this.topicID = topicID;
-        this.order = order;
+        this.subjectID = subjectID;
+        this.type = type;
         this.status = status;
         this.videolink = videolink;
         this.conent = conent;
-        this.subjectID = subjectID;
+        this.order = order;
     }
+
 
     public int getId() {
         return id;
@@ -51,14 +49,6 @@ public class Lesson {
         this.title = title;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getTopicID() {
         return topicID;
     }
@@ -67,12 +57,20 @@ public class Lesson {
         this.topicID = topicID;
     }
 
-    public int getOrder() {
-        return order;
+    public int getSubjectID() {
+        return subjectID;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSubjectID(int subjectID) {
+        this.subjectID = subjectID;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getStatus() {
@@ -99,12 +97,13 @@ public class Lesson {
         this.conent = conent;
     }
 
-    public String getSubjectID() {
-        return subjectID;
+    public int getOrder() {
+        return order;
     }
 
-    public void setSubjectID(String subjectID) {
-        this.subjectID = subjectID;
+    public void setOrder(int order) {
+        this.order = order;
     }
     
+
 }
